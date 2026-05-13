@@ -1,4 +1,4 @@
-const questionNumber = 0
+let questionNumber = 0
 
 const quiz = [
     {
@@ -16,6 +16,7 @@ const quiz = [
 
 function showquestion() {
     const questionDiv = document.getElementById("question")
+    questionDiv.innerHTML = ""
     questionDiv.textContent = quiz[questionNumber].question
 
     const answerDiv = document.getElementById("answer")
@@ -23,7 +24,7 @@ function showquestion() {
 
     quiz[questionNumber].answer.forEach(function(answer){
         answerDiv.innerHTML += `
-            <button>
+            <button onclick="checkanswer('${answer}')">
                 ${answer}
             </button>
         `
@@ -31,7 +32,18 @@ function showquestion() {
 
 }
 
-function checkquestion() {
+function checkanswer(answer) {
+    const resultDiv =document.getElementById("result")
+    if (answer === quiz[questionNumber].correctAnswer) {
+        resultDiv.textContent = "Correct!"
+    } else {
+        resultDiv.textContent = "Wrong!"
+    }
+
+    questionNumber++
+
+    showquestion()
+
     // const answerDiv = 
     /*
      1. Click Button
