@@ -1,4 +1,5 @@
 let questionNumber = 0
+let score = 0
 
 const quiz = [
     {
@@ -6,17 +7,31 @@ const quiz = [
       "answer": ["Albany","Lincoln","Cheyenne","Providence"],
       "correctAnswer": "Lincoln"
     },
-
     {
       "question": "Where was the Declaration of Independence Signed?",
       "answer": ["Pennyslvania", "Boston", "Jamestown", "Harrisburg"],
       "correctAnswer": "Pennyslvania"
+    },
+    {
+      "question": "What state is Juneau in?",
+      "answer": ["Nebraska", "Washington", "Montana", "Alaska"],
+      "correctAnswer": "Alaska"
     },
 ]
 
 function showquestion() {
     const questionDiv = document.getElementById("question")
     questionDiv.innerHTML = ""
+
+    // Stop when quiz is finished (game over screen)
+    if (questionNumber >= quiz.length) {
+        // in question div, show message "Quiz is over!"
+        questionDiv.textContent = "All done"
+        document.getElementById("answer").innerHTML = ""
+        document.getElementById("result").textContent = "Your final score: " + score
+        return
+    }
+
     questionDiv.textContent = quiz[questionNumber].question
 
     const answerDiv = document.getElementById("answer")
@@ -36,6 +51,7 @@ function checkanswer(answer) {
     const resultDiv =document.getElementById("result")
     if (answer === quiz[questionNumber].correctAnswer) {
         resultDiv.textContent = "Correct!"
+        score++
     } else {
         resultDiv.textContent = "Wrong!"
     }
@@ -43,15 +59,6 @@ function checkanswer(answer) {
     questionNumber++
 
     showquestion()
-
-    // const answerDiv = 
-    /*
-     1. Click Button
-     2. Trigger code to check button avec un function
-     3. Get text from button
-     4.Check if button text is the same as correct answer.
-
-    */
 }
 
 showquestion()
